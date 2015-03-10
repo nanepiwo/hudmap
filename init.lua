@@ -219,9 +219,9 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
-minetest.register_chatcommand("hudmap", {
+minetest.register_chatcommand("map", {
 	params = "<cmd> [args]",
-	description = "Hudmap",
+	description = "Toggle Hudmap. See spawn tower for detailed options.",
 	func = function(name, param)
 		local player = minetest.get_player_by_name(name)
 		if param == nil or player == nil then
@@ -229,7 +229,12 @@ minetest.register_chatcommand("hudmap", {
 		end
 		local cmd, args = string.match(param, "([^ ]+) (.+)")
 		cmd = cmd or param
-		if cmd == "on" then
+		if cmd == nil then
+			if hudmap.pref[name].visible == true then
+				hudmap.pref[name].visible = false
+			else
+				hudmap.pref[name].visible = true
+		elseif cmd == "on" then
 			hudmap.pref[name].visible = true
 			update_hud(player)
 		elseif cmd == "off" then
