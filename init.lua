@@ -234,6 +234,7 @@ minetest.register_chatcommand("map", {
 				hudmap.pref[name].visible = false
 			else
 				hudmap.pref[name].visible = true
+			end
 		elseif cmd == "on" then
 			hudmap.pref[name].visible = true
 			update_hud(player)
